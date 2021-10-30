@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' as parser;
@@ -51,7 +52,8 @@ class _BookListState extends State<BookList> {
       // 구글 기본 디자인인 Material Design을 써서 앱을 만든다.
       home: Scaffold(
         appBar: AppBar(
-          title: Text('BookList'),
+          title: Text('Best 20'),
+          backgroundColor: Colors.black,
         ),
         body: FutureBuilder(  //FutureBuilder 를 사용하여 데이터 가져오기
           future: fetch(),
@@ -65,6 +67,7 @@ class _BookListState extends State<BookList> {
             }
           },
         ),
+        drawer: SideDrawer(),
       )
     );
   }
@@ -76,12 +79,13 @@ Widget bodyWidget(List<Map<String, dynamic>> bookList) {
     print(bookList[i]);
   }
   return Container(
-    child: ListView.separated(
+    child: ListView.separated( // listview
       // controller: _scrollController,
       separatorBuilder: (BuildContext context, int index) => const Divider(
         color: Colors.grey,
         height: 4,
       ), //separatorBuilder : item과 item 사이에 그려질 위젯 (개수는 itemCount -1 이 된다)
+    // child: PageView.builder( // pageview
       itemCount: bookList.length, //리스트의 개수
       itemBuilder: (BuildContext context, int index) {
         int row = index+1;
@@ -111,6 +115,7 @@ Widget bodyWidget(List<Map<String, dynamic>> bookList) {
                   alignment: Alignment.center,
                   child: Text(
                     bookList[index]['title'],
+                    // 'asd',
                     style: TextStyle(
                       fontSize: 20,
                     ),
