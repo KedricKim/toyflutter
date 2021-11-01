@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'book-detail.dart';
 import 'main.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/dom.dart' as dom;
@@ -68,6 +69,7 @@ class _BookListState extends State<BookList> {
           },
         ),
         drawer: SideDrawer(),
+        backgroundColor: const Color(0xffece6cc),
       )
     );
   }
@@ -75,9 +77,6 @@ class _BookListState extends State<BookList> {
 
 Widget bodyWidget(List<Map<String, dynamic>> bookList) {
   
-  for(var i = 0;i<5;i++){
-    print(bookList[i]);
-  }
   return Container(
     child: ListView.separated( // listview
       // controller: _scrollController,
@@ -111,16 +110,25 @@ Widget bodyWidget(List<Map<String, dynamic>> bookList) {
                 bookList[index]['thumb'],
               ),
               Expanded(
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    bookList[index]['title'],
-                    // 'asd',
-                    style: TextStyle(
-                      fontSize: 20,
+                child : GestureDetector(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      bookList[index]['title'],
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
                     ),
                   ),
-                ),
+                  onTap: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BookDetail(url : bookList[index]['url'])
+                      ),
+                    )
+                  }
+                )
               ),
             ],
           ),

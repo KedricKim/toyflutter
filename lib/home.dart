@@ -22,9 +22,16 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.black,
       ),
       body: const Center(
-        child: Text('메인 홈입니다.'),
+        child: Text(
+          '메인 홈입니다.'
+          ,style: TextStyle(
+            fontSize :30,
+            color : Colors.black,
+          ),
+        ),
       ),
       drawer: SideDrawer(),
+      backgroundColor: const Color(0xffece6cc),
     );
   }
 }
